@@ -1,5 +1,24 @@
 # Changelog
 
+# Release 6.28.1
+
+## @jaccomeijer/make 6.28.1
+
+### [6.28.1](https://github.com/jaccomeijer/make/compare/6.28.0...6.28.1) (2021-08-04)
+
+
+# Release 6.28.0
+
+## @jaccomeijer/make 6.28.0
+
+## [6.28.0](https://github.com/jaccomeijer/make/compare/6.27.0...6.28.0) (2021-08-04)
+
+
+### Features
+
+* bump test ([77d669f](https://github.com/jaccomeijer/make/commit/77d669fc08306c60cf8ba0383e17121760a96ae3))
+
+
 # Release 6.27.0
 
 ## @jaccomeijer/make 6.27.0

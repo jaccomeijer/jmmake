@@ -8,7 +8,7 @@ export interface PublishMakeContext {
 }
 
 export const publish = async ({ makeContext }: PublishMakeContext) => {
-  const { buildNodes, rootNode, targetNode } = makeContext
+  const { buildNodes, rootNode, targetNode, isMonoRepo } = makeContext
   if (!targetNode) return
   for (const publishNode of buildNodes) {
     if (publishNode.package.private) {
@@ -29,8 +29,12 @@ export const publish = async ({ makeContext }: PublishMakeContext) => {
     'package.json',
     'RELEASE.md',
   ]
-  for (const publishNode of buildNodes) {
-    gitAddFiles.push(path.relative(process.cwd(), publishNode.path))
+  if (isMonoRepo) {
+    // For a single repo the root files are enough, a monorepo requires all
+    // packages to be added here
+    for (const publishNode of buildNodes) {
+      gitAddFiles.push(path.relative(process.cwd(), publishNode.path))
+    }
   }
   const version = targetNode.package.version
   const cmd = 'git'
