@@ -22,7 +22,7 @@ import {
   linkCommand,
   listCommand,
   syncCommand,
-} from '@modelberry/make/plain'
+} from '@jaccomeijer/make/plain'
 
 const packagePositional = (yargs) => {
   yargs.positional('package', {

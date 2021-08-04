@@ -8,7 +8,7 @@ import pluginCommonjs from '@rollup/plugin-commonjs'
 import pluginNodeResolve from '@rollup/plugin-node-resolve'
 import json from '@rollup/plugin-json'
 import pkg from './package.json'
-import rootPkg from '../../package.json'
+import rootPkg from './package.json'
 
 const moduleName = pkg.name.replace(/^@.*\//, '')
 const author = rootPkg.author
