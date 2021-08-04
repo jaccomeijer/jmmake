@@ -8,7 +8,7 @@ import { writeNodeSync } from '../../lib/read-write-node'
 import { sortPackage } from './sort-package'
 
 export interface LinkNodes {
-  fsChildrenArray: ArboristNode[]
+  nodes: ArboristNode[]
   rootNode: any
   dryRun?: boolean
 }
@@ -25,13 +25,9 @@ const syncFields = [
   'repository',
 ]
 
-export const syncNodes = async ({
-  rootNode,
-  fsChildrenArray,
-  dryRun,
-}: LinkNodes) => {
+export const syncNodes = async ({ rootNode, nodes, dryRun }: LinkNodes) => {
   console.log(`Fields: ${syncFields.join(', ')}`)
-  for (const node of fsChildrenArray) {
+  for (const node of nodes) {
     syncFields.forEach(
       (field) => (node.package[field] = rootNode.package[field])
     )

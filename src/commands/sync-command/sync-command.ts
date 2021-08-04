@@ -3,8 +3,7 @@
  * - Sync root package.json values to all packages in monorepo
  */
 
-import Arborist from '@npmcli/arborist'
-import { ArboristNode } from '../../lib/arborist'
+import { getFromArborist } from '../../lib/arborist'
 import { confirm } from './confirm'
 import { syncNodes } from './sync-nodes'
 
@@ -13,17 +12,20 @@ export interface SyncCommand {
 }
 
 export const syncCommand = async ({ monoRepoPath }: SyncCommand) => {
-  const arborist = new Arborist({ path: monoRepoPath })
-  const rootNode = await arborist.loadActual()
-  const fsChildrenArray = Array.from(rootNode.fsChildren) as ArboristNode[]
-  if (fsChildrenArray.length === 0) {
-    console.log(`No packages found in ${monoRepoPath}`)
-    process.exit(0)
+  const { rootNode, fsChildren } = await getFromArborist({ path: monoRepoPath })
+  if (!rootNode) {
+    console.log(`An error occured getting nodes from path ${monoRepoPath}`)
+    return
+  }
+  const nodes = fsChildren
+  if (nodes.length === 0) {
+    console.log(`No npm packages found at path ${monoRepoPath}`)
+    return
   }
   const isConfirmed = await confirm({
-    fsChildrenArray,
+    nodes,
     rootNode,
   })
-  if (!isConfirmed) process.exit(0)
-  syncNodes({ rootNode, fsChildrenArray })
+  if (!isConfirmed) return
+  syncNodes({ rootNode, nodes })
 }

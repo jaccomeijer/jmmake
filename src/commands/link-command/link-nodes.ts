@@ -8,12 +8,12 @@ import { existsSync } from 'fs'
 import { ArboristNode } from '../../lib/arborist'
 
 export interface LinkNodes {
-  fsChildrenArray: ArboristNode[]
+  nodes: ArboristNode[]
   dryRun?: boolean
 }
 
-export const linkNodes = async ({ fsChildrenArray, dryRun }: LinkNodes) => {
-  for (const node of fsChildrenArray) {
+export const linkNodes = async ({ nodes, dryRun }: LinkNodes) => {
+  for (const node of nodes) {
     const splitPath = node.package.name.split('/')
     const linkName = splitPath.pop()
     const path = ['node_modules', ...splitPath].join('/')

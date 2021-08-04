@@ -9,6 +9,7 @@ export interface PublishMakeContext {
 
 export const publish = async ({ makeContext }: PublishMakeContext) => {
   const { buildNodes, rootNode, targetNode } = makeContext
+  if (!targetNode) return
   for (const publishNode of buildNodes) {
     if (publishNode.package.private) {
       console.log(

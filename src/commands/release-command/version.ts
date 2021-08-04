@@ -15,6 +15,7 @@ export interface VersionMakeContext {
 
 export const versionTarget = async ({ makeContext }: VersionMakeContext) => {
   const { rootNode, targetNode } = makeContext
+  if (!targetNode) return
   const path = targetNode.path
   const recommendation = await bumpVersion({ path })
   const { releaseType } = recommendation
@@ -33,8 +34,8 @@ export const versionDependencies = async ({
   makeContext,
 }: VersionMakeContext) => {
   const { rootNode, targetNode, buildNodes } = makeContext
-  const fsChildrenPlusRoot = new Set(rootNode.fsChildren) as Set<ArboristNode>
-  fsChildrenPlusRoot.add(rootNode as ArboristNode)
+  if (!targetNode) return
+  const fsChildrenPlusRoot = [...Array.from(rootNode.fsChildren), rootNode]
 
   // Update packages with target node version
   for (const buildNode of [rootNode, ...buildNodes]) {

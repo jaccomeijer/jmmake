@@ -4,16 +4,14 @@ import { confirmQuestions } from '../../lib/confirm-questions'
 import { linkNodes } from './link-nodes'
 
 interface GetIsConfirmed {
-  fsChildrenArray: ArboristNode[]
+  nodes: ArboristNode[]
 }
 
-export const confirm = async ({ fsChildrenArray }: GetIsConfirmed) => {
+export const confirm = async ({ nodes }: GetIsConfirmed) => {
   console.log(
-    `This will link ${
-      fsChildrenArray.length === 1 ? 'this package' : 'these packages'
-    }:`
+    `This will link ${nodes.length === 1 ? 'this package' : 'these packages'}:`
   )
-  linkNodes({ fsChildrenArray, dryRun: true })
+  linkNodes({ nodes, dryRun: true })
   const answers = await inquirer.prompt(confirmQuestions)
   return answers.policy === 'y'
 }

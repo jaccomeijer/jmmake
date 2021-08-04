@@ -4,16 +4,13 @@ import { confirmQuestions } from '../../lib/confirm-questions'
 import { syncNodes } from './sync-nodes'
 
 interface GetIsConfirmed {
-  fsChildrenArray: ArboristNode[]
+  nodes: ArboristNode[]
   rootNode: any
 }
 
-export const confirm = async ({
-  fsChildrenArray,
-  rootNode,
-}: GetIsConfirmed) => {
+export const confirm = async ({ nodes, rootNode }: GetIsConfirmed) => {
   console.log('Sync fields from root package.json to packages and sort them')
-  syncNodes({ fsChildrenArray, rootNode, dryRun: true })
+  syncNodes({ nodes, rootNode, dryRun: true })
   const answers = await inquirer.prompt(confirmQuestions)
   return answers.policy === 'y'
 }

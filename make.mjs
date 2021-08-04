@@ -83,6 +83,7 @@ yargs(hideBin(process.argv))
   .command(
     'sync [path]',
     'sync root package.json values to all packages in monorepo',
+    packagePositional,
     function (argv) {
       syncCommand({ monoRepoPath: argv.path })
     }
@@ -96,4 +97,6 @@ yargs(hideBin(process.argv))
     }
   )
   .demandCommand()
+  .recommendCommands()
+  .strict()
   .help().argv

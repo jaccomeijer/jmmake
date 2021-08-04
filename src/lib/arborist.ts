@@ -1,3 +1,4 @@
+import Arborist from '@npmcli/arborist'
 import deepmerge from 'deepmerge'
 
 export type ArboristPackage = Record<string, any>
@@ -29,8 +30,23 @@ export type ArboristNode = {
 
 export const packagePath = (node: ArboristNode) => `${node.path}/package.json`
 
+export interface GetFsChildren {
+  path: string
+}
+
+export const getFromArborist = async ({ path }: GetFsChildren) => {
+  const arborist = new Arborist({ path })
+  let rootNode = await arborist.loadActual()
+  const fsChildren = Array.from(rootNode.fsChildren) as ArboristNode[]
+  if (rootNode.errors.length) {
+    console.log(`Error: ${rootNode.errors[0].message}`)
+    rootNode = undefined
+  }
+  return { rootNode, fsChildren }
+}
+
 export interface GetFsChild {
-  fsChildren: Set<ArboristNode>
+  fsChildren: ArboristNode[]
   packageName: string
 }
 
@@ -40,7 +56,7 @@ export const getFsChild = ({ fsChildren, packageName }: GetFsChild) =>
   ) as ArboristNode
 
 export interface GetFsChildPackageNames {
-  fsChildren: Set<ArboristNode>
+  fsChildren: ArboristNode[]
 }
 
 export const getFsChildPackageNames = ({
@@ -55,7 +71,7 @@ export interface updatePackage {
 
 export interface GetEdgesOut {
   packageName: string
-  fsChildren: Set<ArboristNode>
+  fsChildren: ArboristNode[]
 }
 // Edges out are packages that depend on packageName
 export const getEdgesOut = ({ packageName, fsChildren }: GetEdgesOut) => {
@@ -75,7 +91,7 @@ export const getEdgesOut = ({ packageName, fsChildren }: GetEdgesOut) => {
 
 export interface GetRecursEdgesOut {
   packageName: string
-  fsChildren: Set<ArboristNode>
+  fsChildren: ArboristNode[]
 }
 // Recursive edges out are packages that depend on packageName and the packages
 // that depend on these packages
@@ -96,7 +112,7 @@ export const getRecursEdgesOut = ({
 
 export interface UpdateEdgesOut {
   node: ArboristNode
-  fsChildren: Set<ArboristNode>
+  fsChildren: ArboristNode[]
 }
 
 export const updateEdgesOut = ({ fsChildren, node }: UpdateEdgesOut) => {
@@ -121,7 +137,7 @@ export const updateEdgesOut = ({ fsChildren, node }: UpdateEdgesOut) => {
 
 export interface GetNodesToPublish {
   node: ArboristNode
-  fsChildren: Set<ArboristNode>
+  fsChildren: ArboristNode[]
 }
 
 export const getSyncedNodes = ({ fsChildren, node }: GetNodesToPublish) => {

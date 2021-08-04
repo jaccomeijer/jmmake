@@ -37,6 +37,17 @@ export const releaseCommand = async ({
   const makeContext = await makeContextFactory({
     targetPackageName: packageName,
   })
+
+  if (!makeContext.rootNode) {
+    console.log(`An error occured getting nodes`)
+    return
+  }
+
+  if (!makeContext.targetNode && subCommand !== 'build') {
+    console.log(`Without package name the build command is required`)
+    return
+  }
+
   const packageNames = getFsChildPackageNames({
     fsChildren: makeContext.rootNode.fsChildren,
   })
@@ -47,19 +58,19 @@ export const releaseCommand = async ({
         packageName || '<none>'
       } not found, please choose from:\n${packageNames.join('\n')}`
     )
-    process.exit(0)
+    return
   }
 
   const isValidToken = await validateToken({ subCommand })
   if (!isValidToken) {
     console.log("A valid GITHUB_TOKEN needs to be set for 'publish' command")
-    process.exit(0)
+    return
   }
   const isConfirmed = await confirm({
     subCommand,
     buildNodes: makeContext.buildNodes,
   })
-  if (!isConfirmed) process.exit(0)
+  if (!isConfirmed) return
 
   switch (subCommand) {
     case 'build':

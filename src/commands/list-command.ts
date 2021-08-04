@@ -3,20 +3,22 @@
  * - List all packages
  */
 
-import Arborist from '@npmcli/arborist'
-import { ArboristNode } from '../lib/arborist'
+import { getFromArborist } from '../lib/arborist'
 
 export interface ListCommand {
   monoRepoPath: string
 }
 
 export const listCommand = async ({ monoRepoPath }: ListCommand) => {
-  const arborist = new Arborist({ path: monoRepoPath })
-  const rootNode = await arborist.loadActual()
-  const fsChildrenArray = Array.from(rootNode.fsChildren) as ArboristNode[]
-  if (fsChildrenArray.length === 0) {
-    console.log(`No packages found in ${monoRepoPath}`)
-    process.exit(0)
+  const { rootNode, fsChildren } = await getFromArborist({ path: monoRepoPath })
+
+  if (!rootNode) {
+    console.log(`An error occured getting nodes from path ${monoRepoPath}`)
+    return
   }
-  for (const node of fsChildrenArray) console.log(node.package.name)
+  let nodes = fsChildren
+  // When this is not a monorepo, use the root node
+  if (nodes.length === 0) nodes = [rootNode]
+
+  for (const node of nodes) console.log(node.package.name)
 }
