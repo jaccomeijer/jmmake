@@ -8,6 +8,7 @@ import {
 
 export interface MakeContext {
   buildNodes: ArboristNode[]
+  isMonoRepo: boolean
   newChangeLogs: {
     [packageName: string]: string
   }
@@ -26,6 +27,7 @@ export const makeContextFactory = async ({
     path: process.cwd(),
   })
   const response = {
+    isMonoRepo: false,
     newChangeLogs: {},
     rootNode,
   } as MakeContext
@@ -67,5 +69,5 @@ export const makeContextFactory = async ({
       ]
     }
   }
-  return { ...response, buildNodes, targetNode }
+  return { ...response, buildNodes, isMonoRepo: true, targetNode }
 }

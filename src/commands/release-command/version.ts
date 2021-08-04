@@ -75,7 +75,9 @@ const createFileIfNotExists = (fileName: string) => {
 export const writeNewChangelogs = async ({
   makeContext,
 }: VersionMakeContext) => {
-  const { buildNodes } = makeContext
+  const { buildNodes, isMonoRepo } = makeContext
+  // Skip this if we're not handling a mono repo
+  if (!isMonoRepo) return
   for (const buildNode of buildNodes) {
     const changelogFile = `${buildNode.path}/CHANGELOG.md`
     createFileIfNotExists(changelogFile)
