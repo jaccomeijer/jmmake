@@ -1,7 +1,3 @@
-# Changelog
-
-# Release 6.27.0
-
 ## @jaccomeijer/make 6.27.0
 
 ## 6.27.0 (2021-08-04)
@@ -189,6 +185,3 @@
 * use simple version for message ([1f2cc03](https://github.com/jaccomeijer/make/commit/1f2cc0301bc65b9fd760e66e6cf6b74306ea308a))
 
 
-# Release 6.28.1
-
-## Start of changelog

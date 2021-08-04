@@ -1,6 +1,6 @@
 {
   "name": "@jaccomeijer/make",
-  "version": "6.26.0",
+  "version": "6.27.0",
   "description": "Make library for use with NPM 7 and @npmcli/arborist ",
   "keywords": [
     "any",
@@ -9,7 +9,6 @@
     "contentful",
     "gatsbyjs",
     "netlify",
-    "react",
     "typescript"
   ],
   "homepage": "https://github.com/jaccomeijer/make#readme",
