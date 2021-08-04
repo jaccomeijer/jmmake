@@ -1,6 +1,6 @@
 {
   "name": "@jaccomeijer/make",
-  "version": "6.28.1",
+  "version": "6.28.2",
   "description": "Make library for use with NPM 7 and @npmcli/arborist ",
   "keywords": [
     "any",
