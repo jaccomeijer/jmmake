@@ -1,10 +1,10 @@
-## @jaccomeijer/make 6.30.0
+## @jaccomeijer/make 6.30.1
 
-## [6.30.0](https://github.com/jaccomeijer/make/compare/6.29.1...6.30.0) (2021-08-05)
+### [6.30.1](https://github.com/jaccomeijer/make/compare/6.30.0...6.30.1) (2021-08-05)
 
 
-### Features
+### Bug Fixes
 
-* cli support ([32291a5](https://github.com/jaccomeijer/make/commit/32291a545a6295330c1930004c4839f38623252e))
+* package json bin path ([b5d2211](https://github.com/jaccomeijer/make/commit/b5d221115b5c21e65d145ca9b8b81a8f3d0bae26))
 
 
