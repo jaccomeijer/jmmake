@@ -1,10 +1,10 @@
-## @jaccomeijer/make 6.30.1
+## @jaccomeijer/jmmake 6.30.2
 
-### [6.30.1](https://github.com/jaccomeijer/make/compare/6.30.0...6.30.1) (2021-08-05)
+### [6.30.2](https://github.com/jaccomeijer/jmmake/compare/6.30.1...6.30.2) (2021-08-05)
 
 
-### Bug Fixes
+### Commits
 
-* package json bin path ([b5d2211](https://github.com/jaccomeijer/make/commit/b5d221115b5c21e65d145ca9b8b81a8f3d0bae26))
+* rename from make into jmmake ([264b193](https://github.com/jaccomeijer/jmmake/commit/264b19384a096d96cbbb44af8d4da2985cd28ba4))
 
 
