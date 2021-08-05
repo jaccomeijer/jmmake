@@ -46,9 +46,6 @@
       ]
     }
   },
-  "bin": {
-    "jmmake": "build/cli.cjs"
-  },
   "files": [
     "CHANGELOG.md",
     "build"
