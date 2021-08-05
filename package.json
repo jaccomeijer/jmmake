@@ -46,6 +46,7 @@
       ]
     }
   },
+  "bin": "./build/cli.cjs",
   "files": [
     "CHANGELOG.md",
     "build"
