@@ -1,36 +1,28 @@
-/**
- * - Bump version of package
- * - Sync versions of all packages
- * - Update all dependencies that use the packages
- * - Copy files to build folder
- * - Extend package.json fields in build folder
- * - Publish all packages that changed to npm
- *
- */
-
 import dotenv from 'dotenv'
+import yargs, { Argv, Arguments } from 'yargs'
+import { hideBin } from 'yargs/helpers'
+import { linkCommand } from '../commands/link-command/link-command'
+import { listCommand } from '../commands/list-command'
+import { releaseCommand } from '../commands/release-command/release-command'
+import { syncCommand } from '../commands/sync-command/sync-command'
+
+type CliArguments = {
+  package: string
+  path: string
+}
 
 // Will read GITHUB_TOKEN from .env.developemnt
 dotenv.config({
   path: `.env.${process.env.NODE_ENV || 'development'}`,
 })
 
-import yargs from 'yargs'
-import { hideBin } from 'yargs/helpers'
-import {
-  releaseCommand,
-  linkCommand,
-  listCommand,
-  syncCommand,
-} from '@jaccomeijer/make/plain'
-
-const packagePositional = (yargs) => {
+const packagePositional = (yargs: Argv) => {
   yargs.positional('package', {
     type: 'string',
     describe: 'full package name with organisation',
   })
 }
-const pathPositional = (yargs) => {
+const pathPositional = (yargs: Argv) => {
   yargs.positional('path', {
     type: 'string',
     describe: 'path to npm 7 monorepo',
@@ -44,7 +36,7 @@ yargs(hideBin(process.argv))
     'build [package]',
     'build a package',
     packagePositional,
-    function (argv) {
+    function (argv: Arguments<CliArguments>) {
       releaseCommand({ packageName: argv.package, subCommand: 'build' })
     }
   )
@@ -52,7 +44,7 @@ yargs(hideBin(process.argv))
     'version [package]',
     'bumps package and related packages to their new versions',
     packagePositional,
-    function (argv) {
+    function (argv: Arguments<CliArguments>) {
       releaseCommand({ packageName: argv.package, subCommand: 'version' })
     }
   )

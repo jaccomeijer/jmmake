@@ -77,4 +77,27 @@ export default [
     ],
     plugins,
   },
+  {
+    external,
+    input: './src/cli/cli.ts',
+    output: [
+      {
+        banner: `#!/usr/bin/env node\n${banner}`,
+        exports: 'named',
+        file: `./build/cli.mjs`,
+        format: 'es',
+        globals,
+        sourcemap: false,
+      },
+      {
+        banner: `#!/usr/bin/env node\n${banner}`,
+        exports: 'named',
+        file: `./build/cli.cjs`,
+        format: 'cjs',
+        globals,
+        sourcemap: false,
+      },
+    ],
+    plugins,
+  },
 ]
