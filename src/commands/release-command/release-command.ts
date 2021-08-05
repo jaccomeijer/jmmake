@@ -10,6 +10,7 @@
 
 import { getFsChildPackageNames } from '../../lib/arborist'
 import { validateToken } from '../../lib/validate-token'
+import { npmWhoami } from '../../lib/npmWhoami'
 import { makeContextFactory } from './make-context-factory'
 import { confirm } from './confirm'
 import {
@@ -61,10 +62,19 @@ export const releaseCommand = async ({
     return
   }
 
-  const isValidToken = await validateToken({ subCommand })
-  if (!isValidToken) {
-    console.log("A valid GITHUB_TOKEN needs to be set for 'publish' command")
-    return
+  if (subCommand === 'publish' || subCommand === 'release') {
+    const isValidToken = await validateToken()
+    if (!isValidToken) {
+      console.log("A valid GITHUB_TOKEN needs to be set for 'publish' command")
+      return
+    }
+    const whoami = await npmWhoami()
+    if (!whoami) {
+      console.log("'npm whoami' needs to return a value for 'publish' command")
+      return
+    } else {
+      console.log(`npm whoami: ${whoami}`)
+    }
   }
   const isConfirmed = await confirm({
     subCommand,

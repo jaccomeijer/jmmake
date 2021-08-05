@@ -1,11 +1,9 @@
 import { spawn } from 'child_process'
+import { Readable } from 'stream'
 import { ArboristNode } from './arborist'
 
-// TODO: Fix proper type
-type Stream = any
-
 export interface LogStream {
-  stream: Stream
+  stream: Readable
 }
 
 export const logStream = async ({ stream }: LogStream) => {

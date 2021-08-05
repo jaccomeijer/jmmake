@@ -5,12 +5,7 @@ import {
   githubUserName,
 } from './github'
 
-interface GetHasValidToken {
-  subCommand?: string
-}
-
-export const validateToken = async ({ subCommand }: GetHasValidToken) => {
-  if (subCommand === 'build' || subCommand === 'version') return true
+export const validateToken = async () => {
   if (!process.env.GITHUB_TOKEN) return false
 
   const username = await githubUserName({
