@@ -15,9 +15,8 @@ export const linkCommand = async ({ monoRepoPath }: LinkCommand) => {
   const { rootNode, fsChildren } = await getFromArborist({ path: monoRepoPath })
   if (!rootNode) {
     console.log(
-      `An error occured getting nodes` + monoRepoPath
-        ? `from path ${monoRepoPath}`
-        : ''
+      `An error occured getting nodes from ` +
+        (monoRepoPath ? `${monoRepoPath}` : 'current folder')
     )
     return
   }

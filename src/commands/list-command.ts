@@ -14,9 +14,8 @@ export const listCommand = async ({ monoRepoPath }: ListCommand) => {
 
   if (!rootNode) {
     console.log(
-      `An error occured getting nodes` + monoRepoPath
-        ? `from path ${monoRepoPath}`
-        : ''
+      `An error occured getting nodes from ` +
+        (monoRepoPath ? `${monoRepoPath}` : 'current folder')
     )
     return
   }
