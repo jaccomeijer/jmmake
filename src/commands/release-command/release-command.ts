@@ -24,11 +24,12 @@ import {
 import { publish } from './publish'
 import { buildPackage } from './build'
 
-export type Command = 'build' | 'version' | 'publish' | 'release'
+// When sub command is undefined all commands should be executed (full release)
+export type SubCommand = 'build' | 'version' | 'publish' | undefined
 
 export interface RunCommand {
   packageName: string
-  subCommand?: Command
+  subCommand?: SubCommand
 }
 
 export const releaseCommand = async ({
@@ -62,7 +63,7 @@ export const releaseCommand = async ({
     return
   }
 
-  if (subCommand === 'publish' || subCommand === 'release') {
+  if (subCommand === 'publish' || !subCommand) {
     const isValidToken = await validateToken()
     if (!isValidToken) {
       console.log("A valid GITHUB_TOKEN needs to be set for 'publish' command")
