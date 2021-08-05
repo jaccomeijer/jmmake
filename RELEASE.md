@@ -1,10 +1,10 @@
-## @jaccomeijer/make 6.29.1
+## @jaccomeijer/make 6.30.0
 
-### [6.29.1](https://github.com/jaccomeijer/make/compare/6.29.0...6.29.1) (2021-08-05)
+## [6.30.0](https://github.com/jaccomeijer/make/compare/6.29.1...6.30.0) (2021-08-05)
 
 
-### Bug Fixes
+### Features
 
-* remove release as a sub command ([3b6d2eb](https://github.com/jaccomeijer/make/commit/3b6d2eb76264826a7ebb2963bb3a9beaacae6576))
+* cli support ([32291a5](https://github.com/jaccomeijer/make/commit/32291a545a6295330c1930004c4839f38623252e))
 
 
