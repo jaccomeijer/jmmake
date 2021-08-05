@@ -79,7 +79,7 @@ export default [
   },
   {
     external,
-    input: './src/cli/cli.ts',
+    input: './src/cli.ts',
     output: [
       {
         banner: `#!/usr/bin/env node\n${banner}`,
