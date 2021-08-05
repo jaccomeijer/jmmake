@@ -14,7 +14,11 @@ export interface SyncCommand {
 export const syncCommand = async ({ monoRepoPath }: SyncCommand) => {
   const { rootNode, fsChildren } = await getFromArborist({ path: monoRepoPath })
   if (!rootNode) {
-    console.log(`An error occured getting nodes from path ${monoRepoPath}`)
+    console.log(
+      `An error occured getting nodes` + monoRepoPath
+        ? `from path ${monoRepoPath}`
+        : ''
+    )
     return
   }
   const nodes = fsChildren
