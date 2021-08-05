@@ -1,5 +1,5 @@
 {
-  "name": "@jaccomeijer/make",
+  "name": "@jaccomeijer/jmmake",
   "version": "6.30.1",
   "description": "Make library for use with NPM 7 and @npmcli/arborist ",
   "keywords": [
@@ -16,13 +16,13 @@
     "publish",
     "release"
   ],
-  "homepage": "https://github.com/jaccomeijer/make#readme",
+  "homepage": "https://github.com/jaccomeijer/jmmake#readme",
   "bugs": {
-    "url": "https://github.com/jaccomeijer/make/issues"
+    "url": "https://github.com/jaccomeijer/jmmake/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jaccomeijer/make.git"
+    "url": "git+https://github.com/jaccomeijer/jmmake.git"
   },
   "license": "MIT",
   "author": "Jacco Meijer (https://www.jaccomeijer.nl)",
@@ -46,9 +46,7 @@
       ]
     }
   },
-  "bin": {
-    "make": "build/cli.cjs"
-  },
+  "bin": "build/cli.cjs",
   "files": [
     "CHANGELOG.md",
     "build"
