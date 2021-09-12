@@ -30,7 +30,7 @@ const pathPositional = (yargs: Argv) => {
 }
 
 yargs(hideBin(process.argv))
-  .scriptName('make')
+  .scriptName('jmmake')
   .usage('$0 <cmd> [args]')
   .command(
     'build [package]',
