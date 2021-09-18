@@ -1,4 +1,5 @@
 import path from 'path'
+import chalk from 'chalk'
 import { cmdRun } from '../../lib/run'
 import { getGitKey, parseOriginUrl, githubRelease } from '../../lib/github'
 import { MakeContext } from './make-context-factory'
@@ -49,7 +50,9 @@ export const publish = async ({ makeContext }: PublishMakeContext) => {
   }
   const allPassed = getAllExitCodesPassed({ makeContext })
   if (!allPassed) {
-    console.log('Errors found, skipping git push and git release')
+    console.log(
+      chalk.bold.red('Errors found, skipping git push and git release')
+    )
     return
   }
 
@@ -91,7 +94,7 @@ export const publish = async ({ makeContext }: PublishMakeContext) => {
     0
 
   if (exitCode) {
-    console.log('Git push error found, skipping git release')
+    console.log(chalk.bold.red('Git push error found, skipping git release'))
     return
   }
 
