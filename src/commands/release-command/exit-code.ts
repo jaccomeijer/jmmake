@@ -69,7 +69,6 @@ export interface GetAllExitCodesPassed {
 export const getAllExitCodesPassed = ({
   makeContext,
 }: GetAllExitCodesPassed) => {
-  console.log(makeContext.exitCodes)
   let allValid = true
   for (const packageName of Object.keys(makeContext.exitCodes)) {
     const exitCode = makeContext.exitCodes[packageName]
