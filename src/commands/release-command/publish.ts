@@ -47,8 +47,8 @@ export const publish = async ({ makeContext }: PublishMakeContext) => {
       })
     }
   }
-  const allValid = getAllExitCodesPassed({ makeContext })
-  if (!allValid) {
+  const allPassed = getAllExitCodesPassed({ makeContext })
+  if (!allPassed) {
     console.log('Errors found, skipping git push and git release')
     return
   }
