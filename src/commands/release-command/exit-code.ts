@@ -73,9 +73,11 @@ export const getAllExitCodesPassed = ({
   let allValid = true
   for (const packageName of Object.keys(makeContext.exitCodes)) {
     const exitCode = makeContext.exitCodes[packageName]
-    const buildPassed = exitCode.build.codeUnknown || exitCode.build === 0
-    const versionPassed = exitCode.version.codeUnknown || exitCode.version === 0
-    const publishPassed = exitCode.version.codeUnknown || exitCode.publish === 0
+    const buildPassed = exitCode.build.codeUnknown || exitCode.build.code === 0
+    const versionPassed =
+      exitCode.version.codeUnknown || exitCode.version.code === 0
+    const publishPassed =
+      exitCode.publish.codeUnknown || exitCode.publish.code === 0
     if (!buildPassed || !versionPassed || !publishPassed) {
       allValid = false
       break
