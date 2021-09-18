@@ -5,9 +5,13 @@ import {
   getFromArborist,
   getSyncedNodes,
 } from '../../lib/arborist'
+import { PackageExitCodes } from './exit-code'
 
 export interface MakeContext {
   buildNodes: ArboristNode[]
+  exitCodes: {
+    [packageName: string]: PackageExitCodes
+  }
   isMonoRepo: boolean
   newChangeLogs: {
     [packageName: string]: string
@@ -26,17 +30,21 @@ export const makeContextFactory = async ({
   const { rootNode, fsChildren } = await getFromArborist({
     path: process.cwd(),
   })
-  const response = {
+  const response: MakeContext = {
+    buildNodes: [],
+    exitCodes: {},
     isMonoRepo: false,
     newChangeLogs: {},
     rootNode,
-  } as MakeContext
+  }
   let buildNodes = [] as ArboristNode[]
   let targetNode = undefined as ArboristNode | undefined
 
   // When this is not a monorepo, use the root node
   if (fsChildren.length === 0) {
-    return { ...response, buildNodes: [rootNode], targetNode: rootNode }
+    response.buildNodes.push(rootNode)
+    response.targetNode = rootNode
+    return response
   }
 
   if (!targetPackageName) {
@@ -69,5 +77,8 @@ export const makeContextFactory = async ({
       ]
     }
   }
-  return { ...response, buildNodes, isMonoRepo: true, targetNode }
+  response.buildNodes.push(...buildNodes)
+  response.isMonoRepo = true
+  response.targetNode = targetNode
+  return response
 }

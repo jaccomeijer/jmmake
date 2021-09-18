@@ -69,6 +69,7 @@
   "dependencies": {
     "@npmcli/arborist": "2.8.0",
     "@octokit/rest": "18.7.2",
+    "chalk": "4.1.2",
     "conventional-changelog": "3.1.24",
     "conventional-changelog-conventionalcommits": "4.6.0",
     "conventional-recommended-bump": "6.1.0",

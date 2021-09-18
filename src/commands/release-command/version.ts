@@ -8,6 +8,7 @@ import {
   callConventionalChangelog,
 } from './conventional-changelog'
 import { MakeContext } from './make-context-factory'
+import { getExitCodePassed, setExitCode } from './exit-code'
 
 export interface VersionMakeContext {
   makeContext: MakeContext
@@ -16,6 +17,15 @@ export interface VersionMakeContext {
 export const versionTarget = async ({ makeContext }: VersionMakeContext) => {
   const { rootNode, targetNode } = makeContext
   if (!targetNode) return
+
+  // Skip package if build failed
+  const buildValid = getExitCodePassed({
+    makeContext,
+    node: targetNode,
+    subCommand: 'build',
+  })
+  if (!buildValid) return
+
   const path = targetNode.path
   const recommendation = await bumpVersion({ path })
   const { releaseType } = recommendation
@@ -23,11 +33,17 @@ export const versionTarget = async ({ makeContext }: VersionMakeContext) => {
     rootNode.package.version,
     releaseType as semver.ReleaseType
   )
-  console.log(`${recommendation.reason} => ${recommendation.releaseType}`)
-  console.log(
-    `root:${rootNode.package.version}/package:${targetNode.package.version} => ${newVersion}`
-  )
+  const versionReason = `(${recommendation.reason} => ${recommendation.releaseType})`
+  const versionInfo = `${targetNode.package.version} => ${newVersion}`
+  console.log(versionInfo, versionReason)
   targetNode.package.version = newVersion
+  setExitCode({
+    exitCode: 0,
+    makeContext,
+    node: targetNode,
+    subCommand: 'version',
+    versionInfo,
+  })
 }
 
 export const versionDependencies = async ({
@@ -37,24 +53,54 @@ export const versionDependencies = async ({
   if (!targetNode) return
   const fsChildrenPlusRoot = [...Array.from(rootNode.fsChildren), rootNode]
 
-  // Update packages with target node version
-  for (const buildNode of [rootNode, ...buildNodes]) {
-    buildNode.package.version = targetNode.package.version
-  }
-  // Make packages depend on new version of package
+  // Set root package version
+  rootNode.package.version = targetNode.package.version
+
   for (const buildNode of buildNodes) {
+    // Skip package if build failed
+    const buildValid = getExitCodePassed({
+      makeContext,
+      node: buildNode,
+      subCommand: 'build',
+    })
+    if (!buildValid) continue
+
+    // Update packages with target node version
+    buildNode.package.version = targetNode.package.version
+
+    // Make packages depend on new version of package
     updateEdgesOut({ node: buildNode, fsChildren: fsChildrenPlusRoot })
+    setExitCode({
+      exitCode: 0,
+      makeContext,
+      node: buildNode,
+      subCommand: 'version',
+      versionInfo: `${rootNode.package.version} (from root)`,
+    })
   }
+
   // Write all changes to all nodes
   fsChildrenPlusRoot.forEach((node: ArboristNode) => writeNodeSync({ node }))
 
   // Update package-lock.json
-  await cmdRun({ cmd: 'npm', args: ['install'], node: rootNode })
+  await cmdRun({
+    cmd: 'npm',
+    args: ['install'],
+    node: rootNode,
+  })
 }
 
 export const getNewChangelogs = async ({ makeContext }: VersionMakeContext) => {
   const { buildNodes } = makeContext
   for (const buildNode of buildNodes) {
+    // Skip package if build failed
+    const buildValid = getExitCodePassed({
+      makeContext,
+      node: buildNode,
+      subCommand: 'build',
+    })
+    if (!buildValid) continue
+
     const path = buildNode.path
     // Package version must have been set to new version
     const newVersion = buildNode.package.version
@@ -79,6 +125,14 @@ export const writeNewChangelogs = async ({
   // Skip this if we're not handling a mono repo
   if (!isMonoRepo) return
   for (const buildNode of buildNodes) {
+    // Skip package if build failed
+    const buildValid = getExitCodePassed({
+      makeContext,
+      node: buildNode,
+      subCommand: 'build',
+    })
+    if (!buildValid) continue
+
     const changelogFile = `${buildNode.path}/CHANGELOG.md`
     createFileIfNotExists(changelogFile)
     const changelogContent = readFileSync(changelogFile, 'utf-8')

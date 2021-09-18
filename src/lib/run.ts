@@ -19,13 +19,23 @@ export interface CmdRun {
 }
 
 export const cmdRun = async ({ cmd, args, node }: CmdRun) => {
+  let exitCode = -1
   const cwd = node.path
   console.log(`==> (${cwd}) ${cmd} ${args.join(' ')}`)
   const child = spawn(cmd, args, { cwd })
+  // Create a promise so that we won't leave before we have an exit code
+  const exitCodePromise = new Promise((resolve) => {
+    child.on('close', (code: number) => {
+      exitCode = code
+      resolve(code)
+    })
+  })
   await Promise.all([
     logStream({ stream: child.stdout }),
     logStream({ stream: child.stderr }),
+    exitCodePromise,
   ])
+  return exitCode
 }
 
 export interface NpmRun {
@@ -34,7 +44,7 @@ export interface NpmRun {
 }
 
 export const npmRun = async ({ args, node }: NpmRun) => {
-  await cmdRun({
+  return await cmdRun({
     cmd: 'npm',
     args: ['run', ...args],
     node,

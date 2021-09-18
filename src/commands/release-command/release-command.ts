@@ -23,9 +23,11 @@ import {
 } from './version'
 import { publish } from './publish'
 import { buildPackage } from './build'
+import { logReport } from './log-report'
 
 // When sub command is undefined all commands should be executed (full release)
-export type SubCommand = 'build' | 'version' | 'publish' | undefined
+export type SubCommandString = 'build' | 'version' | 'publish'
+export type SubCommand = SubCommandString | undefined
 
 export interface RunCommand {
   packageName: string
@@ -110,4 +112,5 @@ export const releaseCommand = async ({
       await publish({ makeContext })
       break
   }
+  logReport({ makeContext })
 }
