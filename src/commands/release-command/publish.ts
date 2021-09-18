@@ -90,8 +90,8 @@ export const publish = async ({ makeContext }: PublishMakeContext) => {
     gitPushExitCode ||
     0
 
-  if (!exitCode) {
-    console.log('Git push errors found, skipping git release')
+  if (exitCode) {
+    console.log('Git push error found, skipping git release')
     return
   }
 
