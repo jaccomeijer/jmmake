@@ -19,12 +19,13 @@ export const validateToken = async () => {
 
   const remoteOriginUrl = <string>await getGitKey({ key: 'remoteOriginUrl' })
   const { owner, repo } = parseOriginUrl({ remoteOriginUrl })
+  console.log(`Using github repo ${repo} and owner ${owner}`)
 
   const permissionLevel = await githubCollaboratorPermissionLevel({
     owner,
     repo,
     token: process.env.GITHUB_TOKEN || '',
-    username: 'jaccomeijer',
+    username,
   })
 
   if (permissionLevel === 'admin' || permissionLevel === 'write') {
