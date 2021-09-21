@@ -10,7 +10,7 @@
 
 import { getFsChildPackageNames } from '../../lib/arborist'
 import { validateToken } from '../../lib/validate-token'
-import { npmWhoami } from '../../lib/npmWhoami'
+import { npmWhoami } from '../../lib/npm-whoami'
 import { makeContextFactory } from './make-context-factory'
 import { confirm } from './confirm'
 import {
