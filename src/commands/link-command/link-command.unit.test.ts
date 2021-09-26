@@ -50,7 +50,23 @@ describe('Link command', () => {
     const mockedLinkNodes = linkNodes as unknown as jest.MockInstance<any, any>
     expect(mockedConfirm.mock.calls[0][0].nodes.length).toEqual(3)
     expect(mockedLinkNodes.mock.calls[0][0].nodes.length).toEqual(3)
-    expect(mockedConfirm.mock.calls[0][0].nodes[0].name).toEqual('package-a')
-    expect(mockedLinkNodes.mock.calls[0][0].nodes[0].name).toEqual('package-a')
+    expect(mockedConfirm.mock.calls[0][0].nodes[0].name).toMatch(
+      /package-[abc]/
+    )
+    expect(mockedLinkNodes.mock.calls[0][0].nodes[0].name).toMatch(
+      /package-[abc]/
+    )
+    expect(mockedConfirm.mock.calls[0][0].nodes[1].name).toMatch(
+      /package-[abc]/
+    )
+    expect(mockedLinkNodes.mock.calls[0][0].nodes[1].name).toMatch(
+      /package-[abc]/
+    )
+    expect(mockedConfirm.mock.calls[0][0].nodes[2].name).toMatch(
+      /package-[abc]/
+    )
+    expect(mockedLinkNodes.mock.calls[0][0].nodes[2].name).toMatch(
+      /package-[abc]/
+    )
   })
 })
