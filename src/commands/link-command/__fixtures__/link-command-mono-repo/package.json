@@ -1,5 +1,5 @@
 {
-  "name": "list-command-mono-repo",
+  "name": "link-command-mono-repo",
   "version": "2.3.4",
   "description": "Dummy repo for testing",
   "workspaces": [

@@ -5,6 +5,9 @@ describe('List command should', () => {
   beforeEach(() => {
     consoleSpy.mockReset()
   })
+  afterAll(() => {
+    jest.restoreAllMocks()
+  })
 
   test('list single repo packages', async () => {
     await listCommand({

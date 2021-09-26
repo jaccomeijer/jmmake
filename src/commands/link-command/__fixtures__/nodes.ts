@@ -8,4 +8,11 @@ export const nodes: ArboristNode[] = [
     path: './package-a',
     edgesOut: new Set([]),
   },
+  {
+    package: {
+      name: 'package-b',
+    },
+    path: './package-b',
+    edgesOut: new Set([]),
+  },
 ]
