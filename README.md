@@ -13,7 +13,8 @@ with or witout workspaces.
 - [x] Support for single npm repos
 - [x] Check for valid npm login (npm whoami)
 - [x] Show overview of exit status
-- [x] Documentation
+- [x] Basic documentation
+- [ ] Document commands list, link and sync
 - [ ] Unit tests
 
 ## Install
