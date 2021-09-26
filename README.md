@@ -19,7 +19,7 @@ with or witout workspaces.
 ## Install
 
 ```bash
-npm install -g jmmake
+npm install -g @jaccomeijer/jmmake
 ```
 
 ## Run without installing
