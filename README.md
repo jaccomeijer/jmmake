@@ -39,7 +39,7 @@ not publish, push or release.
 jmmake build
 ```
 
-## Version a packages in a repository
+## Version a package in a repository
 
 The version command updates all related packages in a repository. The command
 does not publish, push or release.
@@ -50,7 +50,7 @@ does not publish, push or release.
 jmmake version @org/package-name
 ```
 
-## Publish a packages in a repository
+## Publish a package in a repository
 
 The publish command publishes the package to the npm repository. The command
 also pushes and releases to git.
@@ -59,10 +59,10 @@ also pushes and releases to git.
 jmmake publish @org/package-name
 ```
 
-## Release a packages in a repository
+## Release a package in a repository
 
-The release command combines the three commands above. This will build, version
-and publish the package.
+The release command combines the three commands above. The command will build,
+version and publish the package.
 
 ```bash
 jmmake release @org/package-name
