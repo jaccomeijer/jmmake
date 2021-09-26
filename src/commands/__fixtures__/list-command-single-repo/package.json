@@ -1,0 +1,8 @@
+{
+  "name": "list-command-single-repo",
+  "version": "2.3.4",
+  "description": "Dummy repo for testing",
+  "scripts": {
+    "build": "echo Running build script"
+  }
+}
