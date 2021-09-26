@@ -3,7 +3,7 @@
  * - List all packages
  */
 
-import { getFromArborist } from '../lib/arborist'
+import { getFromArborist } from '../../lib/arborist'
 
 export interface ListCommand {
   monoRepoPath: string

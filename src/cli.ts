@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import yargs, { Argv, Arguments } from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { linkCommand } from './commands/link-command/link-command'
-import { listCommand } from './commands/list-command'
+import { listCommand } from './commands/list-command/list-command'
 import { releaseCommand } from './commands/release-command/release-command'
 import { syncCommand } from './commands/sync-command/sync-command'
 
