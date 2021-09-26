@@ -1,15 +1,11 @@
-## @jaccomeijer/jmmake 6.33.4
+## @jaccomeijer/jmmake 6.33.5
 
-### [6.33.4](https://github.com/jaccomeijer/jmmake/compare/6.33.3...6.33.4) (2021-09-21)
-
-
-### Code Refactoring
-
-* uppercase in filename ([1111661](https://github.com/jaccomeijer/jmmake/commit/1111661a86c2a40167c8b887754126af6b395688))
+### [6.33.5](https://github.com/jaccomeijer/jmmake/compare/6.33.4...6.33.5) (2021-09-26)
 
 
-### Commits
+### Documentation
 
-* log github repo and owner ([3bfc879](https://github.com/jaccomeijer/jmmake/commit/3bfc8798b9546bf2925454f954245489cd41312c))
+* update install command ([104df30](https://github.com/jaccomeijer/jmmake/commit/104df30d72f5e9eac26d1cb9de5485afcb2f8e1c))
+* update readme ([97f209e](https://github.com/jaccomeijer/jmmake/commit/97f209e5b90a89ee7a9958549f51a5dfa331e836))
 
 
