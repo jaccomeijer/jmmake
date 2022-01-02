@@ -8,6 +8,17 @@ supported. Heavy lifting is done by the `@npmcli/arborist` package.
 The build tool works with git repostiories that contain npm packages. Either
 with or witout workspaces.
 
+## Github token
+
+Creating Github releases requires a token with write access to the repository.
+
+```bash
+export GITHUB_TOKEN=paste_token_here
+```
+
+You can rename [template.env.development](template.env.development) into
+`.env.development` and save the token in there.
+
 ## Install
 
 ```bash
