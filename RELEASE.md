@@ -1,10 +1,10 @@
-## @jaccomeijer/jmmake 6.33.9
+## @jaccomeijer/jmmake 6.33.10
 
-### [6.33.9](https://github.com/jaccomeijer/jmmake/compare/6.33.8...6.33.9) (2022-01-02)
+### [6.33.10](https://github.com/jaccomeijer/jmmake/compare/6.33.9...6.33.10) (2022-01-02)
 
 
-### Bug Fixes
+### Commits
 
-* [#1](https://github.com/jaccomeijer/jmmake/issues/1) ([c8252aa](https://github.com/jaccomeijer/jmmake/commit/c8252aa426848eb4488c1c704d83f889e0c09976))
+* log registry argument when used ([0065d4a](https://github.com/jaccomeijer/jmmake/commit/0065d4a262181fbc4bb538609aeddc766fe3bf23))
 
 
