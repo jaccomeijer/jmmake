@@ -1,6 +1,6 @@
 {
   "name": "@jaccomeijer/jmmake",
-  "version": "6.33.8",
+  "version": "6.33.9",
   "description": "Node build tool for npm packages in a git repository. Npm 7 workspaces are supported. Heavy lifting is done by the '@npmcli/arborist' package.",
   "keywords": [
     "arborist",
