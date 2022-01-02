@@ -8,15 +8,6 @@ supported. Heavy lifting is done by the `@npmcli/arborist` package.
 The build tool works with git repostiories that contain npm packages. Either
 with or witout workspaces.
 
-## Todo
-
-- [x] Support for single npm repos
-- [x] Check for valid npm login (npm whoami)
-- [x] Show overview of exit status
-- [x] Basic documentation
-- [ ] Document commands list, link and sync
-- [ ] Unit tests
-
 ## Install
 
 ```bash
@@ -25,10 +16,17 @@ npm install -g @jaccomeijer/jmmake
 
 ## Run without installing
 
-Prefix `jmmake` with `npx @jaccomeijer/` allows for running without installing.
-
 ```bash
 npx @jaccomeijer/jmmake build
+```
+
+## List all packages in a repository
+
+Lists the workspaces of a package. Without workspaces the repository itself is
+listed.
+
+```bash
+jmmake list
 ```
 
 ## Build all packages in a repository
@@ -67,4 +65,59 @@ version and publish the package.
 
 ```bash
 jmmake release @org/package-name
+```
+
+## Sync and sort package.json for all workspaces
+
+Read values from the root `package.json` and write them to the `package.json` of all workspaces.
+
+These fields values are synced:
+
+- author
+- bugs
+- contributors
+- engines
+- homepage
+- keywords
+- license
+- publishConfig
+- repository
+
+This key order is used:
+
+- name
+- version
+- private
+- description
+- keywords
+- homepage
+- bugs
+- repository
+- license
+- author
+- contributors
+- exports
+- typesVersions
+- main
+- files
+- bin
+- publishConfig
+- workspaces
+- scripts
+- dependencies
+- devDependencies
+- peerDependencies
+- engines
+- browserslist
+
+```bash
+jmmake sync
+```
+
+## Link packages from another repository into the working directory
+
+Creates symlinks in the `./node_modules` folder for the package found at the path specified.
+
+```bash
+jmmake link ../link/this/repository
 ```
