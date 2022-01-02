@@ -14,9 +14,17 @@ export const readStream = async ({ stream, messages }: ReadStream) => {
   }
 }
 
-export const npmWhoami = async () => {
+export interface NpmWhoami {
+  /** Optional registry string, e.g. https://npm.pkg.github.com */
+  registry?: string
+}
+
+export const npmWhoami = async ({ registry }: NpmWhoami) => {
   const cwd = process.cwd()
-  const child = spawn('npm', ['whoami'], { cwd })
+  const params: string[] = []
+  params.push('whoami')
+  if (registry) params.push(`--registry=${registry}`)
+  const child = spawn('npm', params, { cwd })
   const stdout: string[] = []
   const stderr: string[] = []
   await Promise.all([

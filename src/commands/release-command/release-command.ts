@@ -71,7 +71,8 @@ export const releaseCommand = async ({
       console.log("A valid GITHUB_TOKEN needs to be set for 'publish' command")
       return
     }
-    const whoami = await npmWhoami()
+    const registry = makeContext.rootNode.package?.publishConfig?.registry
+    const whoami = await npmWhoami({ registry })
     if (!whoami) {
       console.log("'npm whoami' needs to return a value for 'publish' command")
       return
