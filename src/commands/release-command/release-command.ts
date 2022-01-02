@@ -77,7 +77,8 @@ export const releaseCommand = async ({
       console.log("'npm whoami' needs to return a value for 'publish' command")
       return
     } else {
-      console.log(`npm whoami: ${whoami}`)
+      const registryArgument = registry ? ` --registry=${registry}` : ''
+      console.log(`npm whoami${registryArgument}: ${whoami}`)
     }
   }
   const isConfirmed = await confirm({
