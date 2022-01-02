@@ -1,19 +1,20 @@
-## @jaccomeijer/jmmake 6.33.7
+## @jaccomeijer/jmmake 6.33.8
 
-### [6.33.7](https://github.com/jaccomeijer/jmmake/compare/6.33.6...6.33.7) (2021-11-11)
+### [6.33.8](https://github.com/jaccomeijer/jmmake/compare/6.33.7...6.33.8) (2022-01-02)
 
 
-### Code Refactoring
+### Bug Fixes
 
-* list command into separate folder ([c0241f0](https://github.com/jaccomeijer/jmmake/commit/c0241f0c6b26d846c4797f06d77555b6d2c4d122))
+* [#6](https://github.com/jaccomeijer/jmmake/issues/6) ([7f86e1a](https://github.com/jaccomeijer/jmmake/commit/7f86e1abebbc14c61c7984dcce15973a8dbcbc62))
 
 
 ### Commits
 
-* add list comaand unit test ([a7447dd](https://github.com/jaccomeijer/jmmake/commit/a7447ddab18eba424bf73058ab4ecb8d9aaab3dc))
-* fix tests ([af880fa](https://github.com/jaccomeijer/jmmake/commit/af880fa563bca8d26c1eea9b68cda290221d1140))
-* implement confirm test ([3dd5c1c](https://github.com/jaccomeijer/jmmake/commit/3dd5c1cd7e0830d9273d90946d6fb6aa8c4536e0))
-* implement link command test ([00bbd2c](https://github.com/jaccomeijer/jmmake/commit/00bbd2c380531cf663c7aa019db4d68954cef583))
-* update packages ([d142621](https://github.com/jaccomeijer/jmmake/commit/d142621eddfab5c0acd4abf3acedc076af415c07))
+* update packages ([a26962d](https://github.com/jaccomeijer/jmmake/commit/a26962dd6f08f957faea087a8ec27477b511ae81))
+
+
+### Documentation
+
+* add info on github token ([fd0ff10](https://github.com/jaccomeijer/jmmake/commit/fd0ff10a2ec957050be0284df20182420c28326f))
 
 
