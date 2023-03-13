@@ -7,20 +7,21 @@ import pluginTypescript from '@rollup/plugin-typescript'
 import pluginCommonjs from '@rollup/plugin-commonjs'
 import pluginNodeResolve from '@rollup/plugin-node-resolve'
 import json from '@rollup/plugin-json'
-import pkg from './package.json' assert {type: 'json'}
-import rootPkg from './package.json' assert {type: 'json'}
+import rootPkg from './package.json' assert { type: 'json' }
 
-const moduleName = pkg.name.replace(/^@.*\//, '')
+const moduleName = rootPkg.name.replace(/^@.*\//, '')
 const author = rootPkg.author
 const globals = {
   '@npmcli/arborist': 'Arborist',
   fs: 'fs',
   'fs/promises': 'mkdir',
   path: 'path',
+  chalk: 'chalk',
   child_process: 'child_process',
   '@octokit/rest': 'Octokit',
   'conventional-changelog': 'conventionalChangelog',
-  'conventional-changelog-conventionalcommits': 'conventionalChangelogConventionalcommits',
+  'conventional-changelog-conventionalcommits':
+    'conventionalChangelogConventionalcommits',
   'conventional-recommended-bump': 'conventionalRecommendedBump',
   deepmerge: 'deepmerge',
   inquirer: 'inquirer',
@@ -34,7 +35,7 @@ const banner = `
  /**
   * @license
   * author: ${author}
-  * ${moduleName} v${pkg.version}
+  * ${moduleName} v${rootPkg.version}
   * Released under the ${rootPkg.license} license.
   */
  `
