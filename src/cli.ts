@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import yargs, { Argv, Arguments } from 'yargs'
+import yargs, { Argv, ArgumentsCamelCase } from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { linkCommand } from './commands/link-command/link-command'
 import { listCommand } from './commands/list-command/list-command'
@@ -17,13 +17,14 @@ dotenv.config({
 })
 
 const packagePositional = (yargs: Argv) => {
-  yargs.positional('package', {
+  return yargs.positional('package', {
     type: 'string',
     describe: 'full package name with organisation',
   })
 }
+
 const pathPositional = (yargs: Argv) => {
-  yargs.positional('path', {
+  return yargs.positional('path', {
     type: 'string',
     describe: 'path to npm 7 monorepo',
   })
@@ -36,7 +37,7 @@ yargs(hideBin(process.argv))
     'build [package]',
     'build a package',
     packagePositional,
-    function (argv: Arguments<CliArguments>) {
+    (argv: ArgumentsCamelCase<CliArguments>) => {
       releaseCommand({ packageName: argv.package, subCommand: 'build' })
     }
   )
@@ -44,7 +45,7 @@ yargs(hideBin(process.argv))
     'version [package]',
     'bumps package and related packages to their new versions',
     packagePositional,
-    function (argv: Arguments<CliArguments>) {
+    (argv: ArgumentsCamelCase<CliArguments>) => {
       releaseCommand({ packageName: argv.package, subCommand: 'version' })
     }
   )
@@ -52,7 +53,7 @@ yargs(hideBin(process.argv))
     'publish [package]',
     'publish package to package repository and commit/push to git repository',
     packagePositional,
-    function (argv) {
+    (argv: ArgumentsCamelCase<CliArguments>) => {
       releaseCommand({ packageName: argv.package, subCommand: 'publish' })
     }
   )
@@ -60,7 +61,7 @@ yargs(hideBin(process.argv))
     'release [package]',
     'run all three: build, version and publish',
     packagePositional,
-    function (argv) {
+    (argv: ArgumentsCamelCase<CliArguments>) => {
       releaseCommand({ packageName: argv.package })
     }
   )
@@ -68,7 +69,7 @@ yargs(hideBin(process.argv))
     'link [path]',
     'create links to monorepo in node_modules',
     pathPositional,
-    function (argv) {
+    (argv: ArgumentsCamelCase<CliArguments>) => {
       linkCommand({ monoRepoPath: argv.path })
     }
   )
@@ -76,7 +77,7 @@ yargs(hideBin(process.argv))
     'sync [path]',
     'sync root package.json values to all packages in monorepo',
     packagePositional,
-    function (argv) {
+    (argv: ArgumentsCamelCase<CliArguments>) => {
       syncCommand({ monoRepoPath: argv.path })
     }
   )
@@ -84,7 +85,7 @@ yargs(hideBin(process.argv))
     'list [path]',
     'list packages in monorepo',
     pathPositional,
-    function (argv) {
+    (argv: ArgumentsCamelCase<CliArguments>) => {
       listCommand({ monoRepoPath: argv.path })
     }
   )
