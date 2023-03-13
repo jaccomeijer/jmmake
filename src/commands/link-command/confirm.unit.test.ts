@@ -8,7 +8,7 @@ const mockedPrompt = inquirer.prompt as unknown as jest.Mock<any>
 describe('Link command confirm', () => {
   const consoleSpy = jest.spyOn(console, 'log').mockImplementation()
   beforeEach(() => {
-    consoleSpy.mockReset()
+    consoleSpy.mockClear()
   })
   afterAll(() => {
     jest.restoreAllMocks()

@@ -3,7 +3,7 @@ import { listCommand } from './list-command'
 describe('List command should', () => {
   const consoleSpy = jest.spyOn(console, 'log').mockImplementation()
   beforeEach(() => {
-    consoleSpy.mockReset()
+    consoleSpy.mockClear()
   })
   afterAll(() => {
     jest.restoreAllMocks()

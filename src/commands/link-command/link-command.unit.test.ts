@@ -16,7 +16,7 @@ jest.mock('./link-nodes', () => {
 describe('Link command', () => {
   const consoleSpy = jest.spyOn(console, 'log').mockImplementation()
   beforeEach(() => {
-    consoleSpy.mockReset()
+    consoleSpy.mockClear()
     confirmMock.mockClear()
     linkNodesMock.mockClear()
   })
