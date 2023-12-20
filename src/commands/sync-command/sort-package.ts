@@ -44,10 +44,13 @@ interface SortObject {
 const sortObject = ({ obj, compareFn }: SortObject): Record<string, any> => {
   const result = Object.keys(obj)
     .sort(compareFn)
-    .reduce((result, key) => {
-      result[key] = obj[key]
-      return result
-    }, <Record<string, any>>{})
+    .reduce(
+      (result, key) => {
+        result[key] = obj[key]
+        return result
+      },
+      <Record<string, any>>{}
+    )
   return result
 }
 
@@ -63,16 +66,19 @@ export const sortPackage = ({ packageObject }: SortPackage) => {
   })
 
   // Sort sub objects
-  const subsSorted = Object.keys(mainSorted).reduce((result, key) => {
-    if (Array.isArray(mainSorted[key])) {
-      result[key] = mainSorted[key].sort()
-    } else if (typeof mainSorted[key] === 'object') {
-      result[key] = sortObject({ obj: mainSorted[key] })
-    } else {
-      result[key] = mainSorted[key]
-    }
-    return result
-  }, <Record<string, any>>{})
+  const subsSorted = Object.keys(mainSorted).reduce(
+    (result, key) => {
+      if (Array.isArray(mainSorted[key])) {
+        result[key] = mainSorted[key].sort()
+      } else if (typeof mainSorted[key] === 'object') {
+        result[key] = sortObject({ obj: mainSorted[key] })
+      } else {
+        result[key] = mainSorted[key]
+      }
+      return result
+    },
+    <Record<string, any>>{}
+  )
 
   return subsSorted
 }
