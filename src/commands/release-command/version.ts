@@ -6,6 +6,7 @@ import { cmdRun } from '../../lib/run'
 import {
   bumpVersion,
   callConventionalChangelog,
+  getAsyncConfig,
 } from './conventional-changelog'
 import { MakeContext } from './make-context-factory'
 import { getExitCodePassed, setExitCode } from './exit-code'
@@ -25,9 +26,9 @@ export const versionTarget = async ({ makeContext }: VersionMakeContext) => {
     subCommand: 'build',
   })
   if (!buildValid) return
-
+  const config = await getAsyncConfig
   const path = targetNode.path
-  const recommendation = await bumpVersion({ path })
+  const recommendation = await bumpVersion({ config, path })
   const { releaseType } = recommendation
   const newVersion = semver.inc(
     rootNode.package.version,
@@ -105,7 +106,9 @@ export const getNewChangelogs = async ({ makeContext }: VersionMakeContext) => {
     // Package version must have been set to new version
     const newVersion = buildNode.package.version
     const packageName = buildNode.package.name
+    const config = await getAsyncConfig
     makeContext.newChangeLogs[packageName] = await callConventionalChangelog({
+      config,
       path,
       newVersion,
     })

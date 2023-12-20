@@ -2,7 +2,7 @@ import conventionalRecommendedBump from 'conventional-recommended-bump'
 import conventionalChangelog from 'conventional-changelog'
 import createConfig from 'conventional-changelog-conventionalcommits'
 
-const config = createConfig({
+export const getAsyncConfig = createConfig({
   types: [
     { type: 'feat', section: 'Features' },
     { type: 'fix', section: 'Bug Fixes' },
@@ -16,10 +16,12 @@ const config = createConfig({
 })
 
 export interface BumpVersion {
+  config: conventionalRecommendedBump.Options['config']
   path: string
 }
 
 export const bumpVersion = ({
+  config,
   path,
 }: BumpVersion): Promise<conventionalRecommendedBump.Recommendation> => {
   const options = {
@@ -30,11 +32,13 @@ export const bumpVersion = ({
 }
 
 export interface GetNewChangelog {
+  config: conventionalRecommendedBump.Options['config']
   newVersion: string
   path: string
 }
 
 export const callConventionalChangelog = ({
+  config,
   newVersion,
   path,
 }: GetNewChangelog): Promise<string> => {
