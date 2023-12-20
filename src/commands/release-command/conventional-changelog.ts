@@ -21,17 +21,12 @@ export interface BumpVersion {
 
 export const bumpVersion = ({
   path,
-}: BumpVersion): Promise<conventionalRecommendedBump.Callback.Recommendation> => {
-  return new Promise((resolve, reject) => {
-    const options = {
-      config,
-      path,
-    } as conventionalRecommendedBump.Options
-    conventionalRecommendedBump(options, (error, release) => {
-      if (error) return reject(error)
-      return resolve(release)
-    })
-  })
+}: BumpVersion): Promise<conventionalRecommendedBump.Recommendation> => {
+  const options = {
+    config,
+    path,
+  } as conventionalRecommendedBump.Options
+  return conventionalRecommendedBump(options)
 }
 
 export interface GetNewChangelog {
